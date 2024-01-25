@@ -56,7 +56,7 @@ const verifyUser = () => {
     password: password.value,
   };
   const storedRecords = JSON.parse(localStorage.getItem(user.value || {}));
-  if (storedRecords.password === loginData.password) {
+  if (storedRecords?.password === loginData.password) {
     router.push("/MainPanel");
   } else {
     alert("No se encuentra el usuario o la contraseña es incorrecta");
