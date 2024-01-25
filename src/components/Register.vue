@@ -70,13 +70,13 @@ const date = ref("");
 const password = ref("");
 
 const saveUser = () => {
-  const formData = {
+  const registrationData = {
     user: user.value,
     name: name.value,
     date: date.value,
     password: password.value,
   };
-  localStorage.setItem(user.value, JSON.stringify(formData));
+  localStorage.setItem(user.value, JSON.stringify(registrationData));
 
   user.value = "";
   name.value = "";
