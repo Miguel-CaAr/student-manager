@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <div class="register mx-auto col-xl-3 col-lg-3 col-md-4 col-sm-5 col-7 bg-light">
-      <form>
+      <form v-on:submit.prevent="saveUser">
         <div class="mx-auto m-4">
           <h2>Registro</h2>
         </div>
@@ -12,22 +12,24 @@
             id="userRegister"
             class="form-control"
             placeholder="Usuario"
+            v-model="user"
             required
           />
         </div>
         <!-- Nombre input -->
         <div class="form-outline mb-4">
           <input
-            type="number"
+            type="text"
             id="nameRegister"
             class="form-control"
             placeholder="Nombre"
+            v-model="name"
             required
           />
         </div>
         <!-- Fecha de nacimiento input -->
         <div class="form-outline mb-4">
-          <input type="date" id="birthdate" class="form-control" required />
+          <input type="date" id="birthdate" class="form-control" v-model="date" required />
         </div>
         <!-- Contraseña input -->
         <div class="form-outline mb-4">
@@ -36,6 +38,7 @@
             id="passRegister"
             class="form-control"
             placeholder="Contraseña"
+            v-model="password"
             required
           />
         </div>
@@ -44,7 +47,9 @@
           Cancelar
         </button>
         <!-- Guardar registro input -->
-        <button type="button" class="btn btn-success btn-block mb-4 ms-2">Aceptar</button>
+        <button v-on:click="Close" type="submit" class="btn btn-success btn-block mb-4 ms-2">
+          Aceptar
+        </button>
       </form>
     </div>
   </div>
@@ -63,6 +68,21 @@ const user = ref("");
 const name = ref("");
 const date = ref("");
 const password = ref("");
+
+const saveUser = () => {
+  const formData = {
+    user: user.value,
+    name: name.value,
+    date: date.value,
+    password: password.value,
+  };
+  localStorage.setItem(user.value, JSON.stringify(formData));
+
+  user.value = "";
+  name.value = "";
+  date.value = "";
+  password.value = "";
+};
 </script>
 
 <style scoped>
