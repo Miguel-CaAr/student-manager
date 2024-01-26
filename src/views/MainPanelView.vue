@@ -9,28 +9,11 @@
       </div>
     </nav>
   </header>
-  <main class="container">
-    <section class="row pt-3">
-      <div class="options col-md-2 me-5">
-        <button type="button" class="btn btn-info" @click.prevent="TogglePopUp">
-          Agregar curso
-        </button>
-      </div>
-      <div class="card col-md-9">No hay cursos</div>
-    </section>
-    <addCourse v-show="PopUp" v-on:TogglePopUp="TogglePopUp" />
-  </main>
+  <Courses />
 </template>
 
 <script setup>
-import addCourse from "../components/addCourse.vue";
-import { ref } from "vue";
-//----------Abrir modal----------//
-const PopUp = ref(false);
-
-const TogglePopUp = () => {
-  PopUp.value = !PopUp.value;
-};
+import Courses from "../components/Courses.vue";
 </script>
 
 <style scoped>

@@ -71,7 +71,7 @@ const finishDate = ref("");
 
 const saveCourse = () => {
   const courseData = {
-    couse: true,
+    course: true,
     user: $userStore.user,
     nameCouse: nameCouse.value,
     finishDate: finishDate.value,
