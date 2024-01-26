@@ -1,12 +1,12 @@
 <template>
   <main class="container">
     <section class="row pt-3">
-      <div class="options col-md-2 me-5">
+      <div class="options col-md-2">
         <button type="button" class="btn btn-info" @click.prevent="TogglePopUp">
           Agregar curso
         </button>
       </div>
-      <div class="col-md-9 d-flex flex-row-reverse flex-wrap justify-content-between gap-3">
+      <div class="col-md-10 p-0 d-flex flex-row-reverse flex-wrap gap-3">
         <div class="card" style="width: 18rem" v-for="(value, key) in storage" :key="key">
           <div class="card-body">
             <h5 class="card-title text-primary">{{ key }}</h5>
@@ -16,27 +16,44 @@
             <p class="card-text text-secondary">
               Finalizacion del curso: {{ value.finishDate }}
             </p>
+            <div class="text-center">
+              <p><a href="#" @click.prevent="TogglePopUpDetails">Detalles</a></p>
+            </div>
           </div>
         </div>
       </div>
     </section>
-    <addCourse v-show="PopUp" v-on:TogglePopUp="TogglePopUp" />
+    <addCourse v-show="PopUp" v-on:TogglePopUp="TogglePopUp" v-on:GetCourses="GetCourses" />
+    <detailsCourse v-show="PopUpDetails" v-on:TogglePopUpDetails="TogglePopUpDetails" />
   </main>
 </template>
 
 <script setup>
 import addCourse from "./addCourse.vue";
-import { reactive, ref } from "vue";
+import detailsCourse from "./detailsCourse.vue";
+import { onMounted, reactive, ref } from "vue";
 //----------Abrir modal----------//
 const PopUp = ref(false);
+const PopUpDetails = ref(false);
 
 const TogglePopUp = () => {
   PopUp.value = !PopUp.value;
 };
+
+const TogglePopUpDetails = () => {
+  PopUpDetails.value = !PopUpDetails.value;
+};
 //----------Obtener los cursos de localStorage----------//
 const storage = reactive({});
-Object.entries(localStorage).forEach(([key, value]) => {
-  value.includes("course") ? (storage[key] = JSON.parse(value)) : null;
+
+const GetCourses = () => {
+  Object.entries(localStorage).forEach(([key, value]) => {
+    value.includes("course") ? (storage[key] = JSON.parse(value)) : null;
+  });
+};
+
+onMounted(() => {
+  GetCourses();
 });
 </script>
 

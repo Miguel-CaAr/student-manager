@@ -13,7 +13,7 @@
             class="form-control"
             placeholder="Nombre"
             maxlength="15"
-            v-model="nameCouse"
+            v-model="nameCourse"
             required
           />
         </div>
@@ -45,9 +45,7 @@
             Cancelar
           </button>
           <!-- Guardar registro input -->
-          <button v-on:click="Close" type="submit" class="btn btn-success mb-4 ms-2">
-            Aceptar
-          </button>
+          <button type="submit" class="btn btn-success mb-4 ms-2">Aceptar</button>
         </div>
       </form>
     </div>
@@ -58,16 +56,16 @@
 import { defineEmits, ref } from "vue";
 import { useUserStore } from "@/stores/userStore";
 const $userStore = useUserStore();
+const emit = defineEmits(["TogglePopUp", "GetCourses"]);
 
 //----------Cerrar modal----------//
-const emit = defineEmits(["TogglePopUp"]);
-
 const Close = () => {
   emit("TogglePopUp");
+  emit("GetCourses");
 };
 
 //-----------Agregar curso----------//
-const nameCouse = ref("");
+const nameCourse = ref("");
 const description = ref("");
 const finishDate = ref("");
 
@@ -75,15 +73,16 @@ const saveCourse = () => {
   const courseData = {
     course: true,
     user: $userStore.user,
-    nameCouse: nameCouse.value,
+    nameCourse: nameCourse.value,
     finishDate: finishDate.value,
     description: description.value,
   };
-  localStorage.setItem(nameCouse.value, JSON.stringify(courseData));
+  localStorage.setItem(nameCourse.value, JSON.stringify(courseData));
 
-  nameCouse.value = "";
+  nameCourse.value = "";
   description.value = "";
   finishDate.value = "";
+  Close();
 };
 </script>
 
@@ -103,4 +102,3 @@ const saveCourse = () => {
   align-items: center;
 }
 </style>
-@/stores/userStore
