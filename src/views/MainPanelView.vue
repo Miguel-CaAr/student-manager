@@ -3,23 +3,35 @@
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Panel principal</a>
+        <RouterLink to="/">
+          <button type="button" class="btn btn-danger">Salir</button>
+        </RouterLink>
       </div>
     </nav>
   </header>
   <main class="container">
-    <section class="row pt-5">
-      <div class="options col-md-3 me-5">
-        <div class="card p-3">opcion 1 quiza agregar materia</div>
-        <div class="card p-3">opcion 2 quiza agregar gestionar alumnos</div>
-        <div class="card p-3">opcion 3 no se</div>
-        <div class="card p-3">opcion 4 no se</div>
+    <section class="row pt-3">
+      <div class="options col-md-2 me-5">
+        <button type="button" class="btn btn-info" @click.prevent="TogglePopUp">
+          Agregar curso
+        </button>
       </div>
-      <div class="card col-md-8">No hay cursos</div>
+      <div class="card col-md-9">No hay cursos</div>
     </section>
+    <addCourse v-show="PopUp" v-on:TogglePopUp="TogglePopUp" />
   </main>
 </template>
 
-<script setup></script>
+<script setup>
+import addCourse from "../components/addCourse.vue";
+import { ref } from "vue";
+//----------Abrir modal----------//
+const PopUp = ref(false);
+
+const TogglePopUp = () => {
+  PopUp.value = !PopUp.value;
+};
+</script>
 
 <style scoped>
 .options {

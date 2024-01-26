@@ -40,6 +40,8 @@
 import { ref } from "vue";
 import Register from "./Register.vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
+const $userStore = useUserStore();
 const router = useRouter();
 //----------Abrir modal----------//
 const PopUp = ref(false);
@@ -47,7 +49,7 @@ const PopUp = ref(false);
 const TogglePopUp = () => {
   PopUp.value = !PopUp.value;
 };
-//----------Validar login----------//
+//----------Validacion del inicio de sesion----------//
 const user = ref("");
 const password = ref("");
 const verifyUser = () => {
@@ -57,6 +59,7 @@ const verifyUser = () => {
   };
   const storedRecords = JSON.parse(localStorage.getItem(user.value || {}));
   if (storedRecords?.password === loginData.password) {
+    $userStore.updateUser(user.value);
     router.push("/MainPanel");
   } else {
     alert("No se encuentra el usuario o la contraseña es incorrecta");
