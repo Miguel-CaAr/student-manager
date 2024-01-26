@@ -10,6 +10,20 @@
 
 <script setup lang="ts">
 import Login from "../components/Login.vue";
+// import { onMounted } from "vue";
+
+// onMounted(() => {
+//   addTeacher();
+// });
+
+// //----------Agregar maestro de prueba----------//
+// const addTeacher = () => {
+//   const loginData = {
+//     user: "profesor",
+//     password: "123",
+//   };
+//   localStorage.setItem("user", JSON.stringify(loginData));
+// };
 </script>
 
 <style scoped></style>
