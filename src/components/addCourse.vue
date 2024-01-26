@@ -12,6 +12,7 @@
             id="nameCourse"
             class="form-control"
             placeholder="Nombre"
+            maxlength="15"
             v-model="nameCouse"
             required
           />
@@ -23,6 +24,7 @@
             id="descriptionCourse"
             class="form-control"
             placeholder="Descripción"
+            maxlength="64"
             v-model="description"
             required
           />

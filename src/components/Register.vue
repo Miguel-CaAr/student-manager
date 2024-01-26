@@ -12,6 +12,7 @@
             id="userRegister"
             class="form-control"
             placeholder="Usuario"
+            maxlength="15"
             v-model="user"
             required
           />
@@ -23,6 +24,7 @@
             id="nameRegister"
             class="form-control"
             placeholder="Nombre"
+            maxlength="50"
             v-model="name"
             required
           />
@@ -38,6 +40,7 @@
             id="passRegister"
             class="form-control"
             placeholder="Contraseña"
+            maxlength="100"
             v-model="password"
             required
           />

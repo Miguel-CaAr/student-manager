@@ -8,6 +8,7 @@
           id="user"
           class="form-control"
           placeholder="Nombre de usuario"
+          maxlength="15"
           v-model="user"
           required
         />
@@ -19,6 +20,7 @@
           id="password"
           class="form-control"
           placeholder="Contraseña"
+          maxlength="100"
           v-model="password"
           required
         />
