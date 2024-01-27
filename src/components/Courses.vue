@@ -2,8 +2,9 @@
   <main class="container-fluid p-2">
     <section class="row pt-3">
       <div class="options col-md-2">
-        <button type="button" class="btn btn-info" @click.prevent="TogglePopUp">
-          Agregar curso
+        <button type="button" class="btn btn-info mb-3" @click.prevent="TogglePopUp">Agregar curso</button>
+        <button type="button" class="btn btn-warning mb-3" @click.prevent="TogglePopUpAddStudent">
+          Agregar alumno
         </button>
       </div>
       <div class="col-md-10 d-flex flex-row-reverse flex-wrap gap-3">
@@ -13,14 +14,10 @@
             <p class="card-text">
               {{ value.description }}
             </p>
-            <p class="card-text text-secondary">
-              Finalizacion del curso: {{ value.finishDate }}
-            </p>
+            <p class="card-text text-secondary">Finalizacion del curso: {{ value.finishDate }}</p>
             <div class="text-center">
               <p>
-                <a href="#" @click.prevent="TogglePopUpDetails" @click="sendDetails(value)"
-                  >Detalles</a
-                >
+                <a href="#" @click.prevent="TogglePopUpDetails" @click="sendDetails(value)">Detalles</a>
               </p>
             </div>
           </div>
@@ -29,6 +26,7 @@
     </section>
     <addCourse v-show="PopUp" v-on:TogglePopUp="TogglePopUp" v-on:GetCourses="GetCourses" />
     <detailsCourse v-show="PopUpDetails" v-on:TogglePopUpDetails="TogglePopUpDetails" />
+    <addStudent v-show="PopUpAddStudent" v-on:TogglePopUpAddStudent="TogglePopUpAddStudent" />
   </main>
 </template>
 
@@ -37,10 +35,13 @@ import addCourse from "./addCourse.vue";
 import detailsCourse from "./detailsCourse.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useCourseStore } from "@/stores/courseStore";
+import addStudent from "./addStudent.vue";
+
 const $courseStore = useCourseStore();
 //----------Abrir modal----------//
 const PopUp = ref(false);
 const PopUpDetails = ref(false);
+const PopUpAddStudent = ref(false);
 
 const TogglePopUp = () => {
   PopUp.value = !PopUp.value;
@@ -48,6 +49,10 @@ const TogglePopUp = () => {
 
 const TogglePopUpDetails = () => {
   PopUpDetails.value = !PopUpDetails.value;
+};
+
+const TogglePopUpAddStudent = () => {
+  PopUpAddStudent.value = !PopUpAddStudent.value;
 };
 //----------Obtener los cursos de localStorage----------//
 const storage = reactive({});
