@@ -31,19 +31,11 @@
         </div>
         <!-- Fecha de finalizacion curso input -->
         <div class="form-outline mb-4">
-          <input
-            type="date"
-            id="finishDate"
-            class="form-control"
-            v-model="finishDate"
-            required
-          />
+          <input type="date" id="finishDate" class="form-control" v-model="finishDate" required />
         </div>
         <div class="d-flex justify-content-center">
           <!-- Cerrar button -->
-          <button v-on:click="Close" type="button" class="btn btn-danger mb-4 me-2">
-            Cancelar
-          </button>
+          <button v-on:click="Close" type="button" class="btn btn-danger mb-4 me-2">Cancelar</button>
           <!-- Guardar registro input -->
           <button type="submit" class="btn btn-success mb-4 ms-2">Aceptar</button>
         </div>
@@ -71,7 +63,6 @@ const finishDate = ref("");
 
 const saveCourse = () => {
   const courseData = {
-    course: true,
     user: $userStore.user,
     nameCourse: nameCourse.value,
     finishDate: finishDate.value,
