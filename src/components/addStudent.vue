@@ -1,15 +1,23 @@
 <template>
   <div class="background" @mouseenter="getData">
     <div class="manager mx-auto col-xl-3 col-lg-3 col-md-4 col-sm-5 col-7 bg-light">
-      <form>
+      <form v-on:submit.prevent="saveStudent">
         <div class="mx-auto m-4">
           <h2 class="text-center">Agregar estudiante</h2>
         </div>
         <!-- Nombre curso input -->
         <div class="form-outline mb-4">
-          <input type="text" id="user" class="form-control" placeholder="Usuario" maxlength="30" required />
+          <input
+            v-model="userStudent"
+            type="text"
+            id="user"
+            class="form-control"
+            placeholder="Ingrese un usuario existente"
+            maxlength="30"
+            required
+          />
         </div>
-        <select class="form-select mb-4" aria-label="Default select example">
+        <select v-model="courseEnrolled" class="form-select mb-4" aria-label="Default select example">
           <option selected disabled required>Seleccione una materia</option>
           <option v-for="(value, key) in storage" :key="key">{{ key }}</option>
         </select>
@@ -25,7 +33,7 @@
 </template>
 
 <script setup>
-import { defineEmits, onMounted, reactive } from "vue";
+import { defineEmits, onMounted, reactive, ref } from "vue";
 const emit = defineEmits(["TogglePopUpAddStudent"]);
 
 //----------Cerrar modal----------//
@@ -44,6 +52,29 @@ const getData = () => {
 onMounted(() => {
   getData();
 });
+
+//-----------Agregar estudiante----------//
+const userStudent = ref("");
+const courseEnrolled = ref("");
+
+const saveStudent = () => {
+  const studentData = {
+    idStudent: `${userStudent.value}.${courseEnrolled.value}`,
+    userStudent: userStudent.value,
+    courseEnrolled: courseEnrolled.value,
+  };
+  //verificar si existe el usuario
+  const storedRecords = JSON.parse(localStorage.getItem(userStudent.value || {}));
+  if (storedRecords?.user === studentData.userStudent) {
+    localStorage.setItem(studentData.idStudent, JSON.stringify(studentData));
+  } else {
+    alert("No se encuentra el usuario");
+  }
+
+  userStudent.value = "";
+  courseEnrolled.value = "";
+  Close();
+};
 </script>
 
 <style scoped>
