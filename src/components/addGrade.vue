@@ -21,6 +21,7 @@
         <div class="form-outline mb-4 d-flex justify-content-center">
           <input type="number" id="gradeInput" class="form-control" maxlength="2" v-model="gradeInput" required />
         </div>
+        <p v-if="isEnroll" class="text-danger text-center">El alumno no esta inscrito en la materia</p>
         <div class="d-flex justify-content-center">
           <!-- Cerrar button -->
           <button v-on:click="Close" type="button" class="btn btn-danger mb-4 me-2">Cancelar</button>
@@ -38,6 +39,7 @@ const emit = defineEmits(["TogglePopUpAddGrade"]);
 const userSelect = ref("");
 const courseSelect = ref("");
 const gradeInput = ref("");
+const isEnroll = ref(false);
 //----------Cerrar modal----------//
 const Close = () => {
   emit("TogglePopUpAddGrade");
@@ -61,11 +63,17 @@ const getData = () => {
 //----------Verificar inscripcion----------//
 const verifyData = () => {
   //Verificacion de alumno inscrito
-  Object.entries(localStorage).forEach(([key, value]) => {
+  const entries = Object.entries(localStorage);
+
+  for (const [key, value] of entries) {
     if (value.includes(userSelect.value) && value.includes(courseSelect.value)) {
       saveData(JSON.parse(value).idStudent, JSON.parse(value));
+      isEnroll.value = false;
+      break; // Rompe el bucle cuando se cumple la condición
+    } else {
+      isEnroll.value = true;
     }
-  });
+  }
 };
 //----------Guardar calificacion-----------//
 const saveData = (idStudent, data) => {
