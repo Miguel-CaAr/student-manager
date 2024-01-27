@@ -8,9 +8,7 @@
         <p>{{ data.description }}</p>
         <!-- Cerrar button -->
         <div class="d-flex justify-content-center">
-          <button v-on:click="Close" type="button" class="btn btn-danger mb-4 me-2">
-            Cerrar
-          </button>
+          <button v-on:click="Close" type="button" class="btn btn-danger mb-4 me-2">Cerrar</button>
         </div>
       </form>
     </div>

@@ -38,7 +38,7 @@ import { useCourseStore } from "@/stores/courseStore";
 import addStudent from "./addStudent.vue";
 
 const $courseStore = useCourseStore();
-//----------Abrir modal----------//
+//----------Abrir modales----------//
 const PopUp = ref(false);
 const PopUpDetails = ref(false);
 const PopUpAddStudent = ref(false);
