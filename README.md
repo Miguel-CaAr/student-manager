@@ -1,10 +1,10 @@
 # student_manager
 
-This template should help get you started developing with Vue 3 in Vite.
+...
 
-## Recommended IDE Setup
+## Tools
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[Vue 3](https://vuejs.org/) + [Vue-Router](https://router.vuejs.org/) + [Pinia](https://pinia.vuejs.org/) + [Bootstrap 5)](https://getbootstrap.com/).
 
 ## Customize configuration
 
@@ -27,4 +27,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
 # Student_manager
