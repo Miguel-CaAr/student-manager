@@ -7,27 +7,11 @@
         </div>
         <!-- Nombre curso input -->
         <div class="form-outline mb-4">
-          <input
-            type="text"
-            id="nameCourse"
-            class="form-control"
-            placeholder="Nombre"
-            maxlength="30"
-            v-model="nameCourse"
-            required
-          />
+          <input type="text" id="nameCourse" class="form-control" placeholder="Nombre" maxlength="30" v-model="nameCourse" required />
         </div>
         <!-- Descripcion curso input -->
         <div class="form-outline mb-4">
-          <input
-            type="text"
-            id="descriptionCourse"
-            class="form-control"
-            placeholder="Descripción"
-            maxlength="64"
-            v-model="description"
-            required
-          />
+          <input type="text" id="descriptionCourse" class="form-control" placeholder="Descripción" maxlength="64" v-model="description" required />
         </div>
         <!-- Fecha de finalizacion curso input -->
         <div class="form-outline mb-4">
@@ -64,7 +48,7 @@ const finishDate = ref("");
 const saveCourse = () => {
   const courseData = {
     course: true,
-    user: $userStore.user,
+    createdBy: $userStore.user,
     nameCourse: nameCourse.value,
     finishDate: finishDate.value,
     description: description.value,
