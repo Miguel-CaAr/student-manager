@@ -62,11 +62,13 @@ const saveStudent = () => {
     idStudent: `${userStudent.value}.${enrolled.value}`,
     userStudent: userStudent.value,
     enrolled: enrolled.value,
+    nameStudent: "",
     grade: "",
   };
   //verificar si existe el usuario
   const storedRecords = JSON.parse(localStorage.getItem(userStudent.value || {}));
   if (storedRecords?.user === studentData.userStudent) {
+    studentData.nameStudent = storedRecords.name;
     localStorage.setItem(studentData.idStudent, JSON.stringify(studentData));
   } else {
     alert("No se encuentra el usuario");
