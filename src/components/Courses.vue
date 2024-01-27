@@ -1,11 +1,16 @@
 <template>
   <main class="container-fluid p-2">
     <section class="row pt-3">
-      <div class="options col-md-2">
-        <button type="button" class="btn btn-info mb-3" @click.prevent="TogglePopUp">Agregar curso</button>
-        <button type="button" class="btn btn-warning mb-3" @click.prevent="TogglePopUpAddStudent">
-          Agregar alumno
-        </button>
+      <div class="col-md-2">
+        <ul class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px" data-bs-theme="light">
+          <li class="text-center">Opciones</li>
+          <li>
+            <a class="dropdown-item rounded-2" href="#" type="button" @click.prevent="TogglePopUp">Agregar curso </a>
+          </li>
+          <li>
+            <a class="dropdown-item rounded-2" href="#" type="button" @click.prevent="TogglePopUpAddStudent">Agregar alumno</a>
+          </li>
+        </ul>
       </div>
       <div class="col-md-10 d-flex flex-row-reverse flex-wrap gap-3">
         <div class="card" style="width: 18rem" v-for="(value, key) in storage" :key="key">
@@ -74,4 +79,8 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.dropdown-item:hover {
+  background-color: #5b95fe;
+}
+</style>
