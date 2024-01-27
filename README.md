@@ -1,6 +1,6 @@
 # student_manager
 
-...
+URL: https://student-manager-vue3.netlify.app/
 
 ## Tools
 
