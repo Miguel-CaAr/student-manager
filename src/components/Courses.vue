@@ -10,6 +10,9 @@
           <li>
             <a class="dropdown-item rounded-2" href="#" type="button" @click.prevent="TogglePopUpAddStudent">Agregar alumno</a>
           </li>
+          <li>
+            <a class="dropdown-item rounded-2" href="#" type="button" @click.prevent="TogglePopUpAddGrade">Calificar alumno</a>
+          </li>
         </ul>
       </div>
       <div class="col-md-10 d-flex flex-row-reverse flex-wrap gap-3">
@@ -36,21 +39,24 @@
     <addCourse v-show="PopUp" v-on:TogglePopUp="TogglePopUp" v-on:GetCourses="GetCourses" />
     <detailsCourse v-show="PopUpDetails" v-on:TogglePopUpDetails="TogglePopUpDetails" />
     <addStudent v-show="PopUpAddStudent" v-on:TogglePopUpAddStudent="TogglePopUpAddStudent" />
+    <addGrade v-show="PopUpAddGrade" v-on:TogglePopUpAddGrade="TogglePopUpAddGrade" />
   </main>
 </template>
 
 <script setup>
 import addCourse from "./addCourse.vue";
 import detailsCourse from "./detailsCourse.vue";
+import addStudent from "./addStudent.vue";
+import addGrade from "./addGrade.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useCourseStore } from "@/stores/courseStore";
-import addStudent from "./addStudent.vue";
 
 const $courseStore = useCourseStore();
 //----------Abrir modal----------//
 const PopUp = ref(false);
 const PopUpDetails = ref(false);
 const PopUpAddStudent = ref(false);
+const PopUpAddGrade = ref(false);
 
 const TogglePopUp = () => {
   PopUp.value = !PopUp.value;
@@ -62,6 +68,10 @@ const TogglePopUpDetails = () => {
 
 const TogglePopUpAddStudent = () => {
   PopUpAddStudent.value = !PopUpAddStudent.value;
+};
+
+const TogglePopUpAddGrade = () => {
+  PopUpAddGrade.value = !PopUpAddGrade.value;
 };
 //----------Obtener los cursos de localStorage----------//
 const storage = reactive({});
