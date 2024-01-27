@@ -1,12 +1,12 @@
 <template>
-  <main class="container">
+  <main class="container-fluid p-2">
     <section class="row pt-3">
       <div class="options col-md-2">
         <button type="button" class="btn btn-info" @click.prevent="TogglePopUp">
           Agregar curso
         </button>
       </div>
-      <div class="col-md-10 p-0 d-flex flex-row-reverse flex-wrap gap-3">
+      <div class="col-md-10 d-flex flex-row-reverse flex-wrap gap-3">
         <div class="card" style="width: 18rem" v-for="(value, key) in storage" :key="key">
           <div class="card-body">
             <h5 class="card-title text-primary">{{ key }}</h5>
