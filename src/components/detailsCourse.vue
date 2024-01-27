@@ -1,11 +1,11 @@
 <template>
-  <div class="background">
+  <div class="background" @mouseenter="GetUsers">
     <div class="details mx-auto col-xl-7 col-lg-8 col-md-9 col-sm-10 col-11 bg-light">
       <form>
         <div class="mx-auto m-4">
-          <h2>{{ data.nameCourse }}</h2>
+          <h2>{{ courses.nameCourse }}</h2>
         </div>
-        <p>{{ data.description }}</p>
+        <p>{{ courses.description }}</p>
         <!-- Tabla usuarios -->
         <div class="table-container">
           <table class="table">
@@ -18,10 +18,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>miguelcastro</td>
-                <td>Hector Miguel Castro Arredondo</td>
-                <td>10</td>
+              <tr v-for="(value, key) in storage" :key="key">
+                <template v-if="value.enrolled.includes(courses.nameCourse)">
+                  <td>{{ value.userStudent }}</td>
+                  <td>{{ value.nameStudent }}</td>
+                  <td>{{ value.grade }}</td>
+                </template>
               </tr>
             </tbody>
           </table>
@@ -36,7 +38,7 @@
 </template>
 
 <script setup>
-import { defineEmits, watch, ref } from "vue";
+import { defineEmits, watch, ref, reactive } from "vue";
 import { useCourseStore } from "@/stores/courseStore";
 //----------Cerrar modal----------//
 const emit = defineEmits(["TogglePopUpDetails"]);
@@ -46,17 +48,25 @@ const Close = () => {
 };
 //----------Obtener datos-----------//
 const $courseStore = useCourseStore();
-const data = ref({});
-const updateData = () => {
-  data.value = $courseStore.detailsCourse;
+const courses = ref({});
+const updateCourses = () => {
+  courses.value = $courseStore.detailsCourse;
 };
 //Aqui se observan cambios en el store de pina
 watch(
   () => $courseStore.detailsCourse,
   () => {
-    updateData();
+    updateCourses();
   }
 );
+//----------Obtener los usuarios de localStorage----------//
+const storage = reactive({});
+
+const GetUsers = () => {
+  Object.entries(localStorage).forEach(([key, value]) => {
+    value.includes("grade") ? (storage[key] = JSON.parse(value)) : null;
+  });
+};
 </script>
 
 <style scoped>
