@@ -17,7 +17,7 @@
             required
           />
         </div>
-        <select v-model="courseEnrolled" class="form-select mb-4" aria-label="Default select example">
+        <select v-model="enrolled" class="form-select mb-4" aria-label="Default select example">
           <option selected disabled required>Seleccione una materia</option>
           <option v-for="(value, key) in storage" :key="key">{{ key }}</option>
         </select>
@@ -55,13 +55,13 @@ onMounted(() => {
 
 //-----------Agregar estudiante----------//
 const userStudent = ref("");
-const courseEnrolled = ref("");
+const enrolled = ref("");
 
 const saveStudent = () => {
   const studentData = {
-    idStudent: `${userStudent.value}.${courseEnrolled.value}`,
+    idStudent: `${userStudent.value}.${enrolled.value}`,
     userStudent: userStudent.value,
-    courseEnrolled: courseEnrolled.value,
+    enrolled: enrolled.value,
   };
   //verificar si existe el usuario
   const storedRecords = JSON.parse(localStorage.getItem(userStudent.value || {}));
@@ -72,7 +72,7 @@ const saveStudent = () => {
   }
 
   userStudent.value = "";
-  courseEnrolled.value = "";
+  enrolled.value = "";
   Close();
 };
 </script>
