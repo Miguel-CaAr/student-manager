@@ -17,7 +17,11 @@
               Finalizacion del curso: {{ value.finishDate }}
             </p>
             <div class="text-center">
-              <p><a href="#" @click.prevent="TogglePopUpDetails">Detalles</a></p>
+              <p>
+                <a href="#" @click.prevent="TogglePopUpDetails" @click="sendDetails(value)"
+                  >Detalles</a
+                >
+              </p>
             </div>
           </div>
         </div>
@@ -32,6 +36,8 @@
 import addCourse from "./addCourse.vue";
 import detailsCourse from "./detailsCourse.vue";
 import { onMounted, reactive, ref } from "vue";
+import { useCourseStore } from "@/stores/courseStore";
+const $courseStore = useCourseStore();
 //----------Abrir modal----------//
 const PopUp = ref(false);
 const PopUpDetails = ref(false);
@@ -50,6 +56,12 @@ const GetCourses = () => {
   Object.entries(localStorage).forEach(([key, value]) => {
     value.includes("course") ? (storage[key] = JSON.parse(value)) : null;
   });
+};
+
+//-----------Enviar detalles del curso----------//
+
+const sendDetails = (courseDetails) => {
+  $courseStore.updateDetails(courseDetails);
 };
 
 onMounted(() => {

@@ -12,7 +12,7 @@
             id="nameCourse"
             class="form-control"
             placeholder="Nombre"
-            maxlength="15"
+            maxlength="30"
             v-model="nameCourse"
             required
           />
